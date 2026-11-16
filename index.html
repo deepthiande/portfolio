@@ -724,36 +724,45 @@
               <p class="text-muted small mb-4">Have an inquiry or opportunity? Fill out the details below and I will get back to you promptly.</p>
               
               <form id="contact-form" novalidate>
+                <!-- Hidden inputs for EmailJS template variable compatibility -->
+                <input type="hidden" name="from_name" id="contact-from-name">
+                <input type="hidden" name="from_email" id="contact-from-email">
+                <input type="hidden" name="reply_to" id="contact-reply-to">
+
                 <div class="row g-3">
                   <div class="col-md-6">
                     <label for="contact-name" class="form-label fw-semibold small">Your Name <span class="text-danger">*</span></label>
                     <input type="text" name="name" class="form-control" id="contact-name" placeholder="John Doe" required>
+                    <div class="invalid-feedback">Please enter your full name.</div>
                   </div>
                   
                   <div class="col-md-6">
                     <label for="contact-email" class="form-label fw-semibold small">Your Email <span class="text-danger">*</span></label>
                     <input type="email" class="form-control" name="email" id="contact-email" placeholder="john@example.com" required>
+                    <div class="invalid-feedback">Please enter a valid email address.</div>
                   </div>
                   
                   <div class="col-12">
                     <label for="contact-subject" class="form-label fw-semibold small">Subject <span class="text-danger">*</span></label>
                     <input type="text" class="form-control" name="subject" id="contact-subject" placeholder="Fresher Job Opportunity / Project Inquiry" required>
+                    <div class="invalid-feedback">Please enter a subject.</div>
                   </div>
                   
                   <div class="col-12">
                     <label for="contact-message" class="form-label fw-semibold small">Message <span class="text-danger">*</span></label>
                     <textarea class="form-control" name="message" id="contact-message" rows="5" placeholder="Hi Deepthi, I reviewed your portfolio and would like to connect regarding..." required></textarea>
+                    <div class="invalid-feedback">Please enter your message.</div>
                   </div>
 
                   <div class="col-12">
-                    <button type="submit" class="btn btn-primary px-4 py-2 fw-semibold rounded-pill">
+                    <button type="submit" id="contact-submit-btn" class="btn btn-primary px-4 py-2 fw-semibold rounded-pill">
                       <i class="bi bi-send-fill me-2"></i>Send Message
                     </button>
                   </div>
                 </div>
 
                 <!-- Form Feedback Alert -->
-                <div id="form-feedback" class="form-feedback"></div>
+                <div id="form-feedback" class="form-feedback mt-3" role="alert" aria-live="polite"></div>
               </form>
             </div>
           </div>
@@ -893,6 +902,18 @@
   <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
   <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+  <!-- EmailJS Official SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    (function() {
+      if (typeof emailjs !== 'undefined') {
+        emailjs.init({
+          publicKey: "CPWJe92cLV1tvX_0K"
+        });
+      }
+    })();
+  </script>
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
